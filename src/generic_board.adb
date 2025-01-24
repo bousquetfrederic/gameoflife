@@ -32,11 +32,11 @@ package body Generic_Board is
 
       --  Fill the corner cells
       Board.Grid (T_Rows'First, T_Cols'First).Neighbour_Count :=
-         (North_West => Board.Empty_Cell.Life_Count'Access,
-          North => Board.Empty_Cell.Life_Count'Access,
-          North_East => Board.Empty_Cell.Life_Count'Access,
-          West => Board.Empty_Cell.Life_Count'Access,
-          South_West => Board.Empty_Cell.Life_Count'Access,
+         (North_West => Board.Wall.Life_Count'Access,
+          North => Board.Wall.Life_Count'Access,
+          North_East => Board.Wall.Life_Count'Access,
+          West => Board.Wall.Life_Count'Access,
+          South_West => Board.Wall.Life_Count'Access,
           East =>
              Board.Grid (T_Rows'First, T_Cols'First + 1).Life_Count'Access,
           South_East =>
@@ -46,11 +46,11 @@ package body Generic_Board is
              Board.Grid (T_Rows'First + 1, T_Cols'First).Life_Count'Access);
 
       Board.Grid (T_Rows'First, T_Cols'Last).Neighbour_Count :=
-         (North_West => Board.Empty_Cell.Life_Count'Access,
-          North => Board.Empty_Cell.Life_Count'Access,
-          North_East => Board.Empty_Cell.Life_Count'Access,
-          East => Board.Empty_Cell.Life_Count'Access,
-          South_East => Board.Empty_Cell.Life_Count'Access,
+         (North_West => Board.Wall.Life_Count'Access,
+          North => Board.Wall.Life_Count'Access,
+          North_East => Board.Wall.Life_Count'Access,
+          East => Board.Wall.Life_Count'Access,
+          South_East => Board.Wall.Life_Count'Access,
           West =>
              Board.Grid (T_Rows'First, T_Cols'Last - 1).Life_Count'Access,
           South_West =>
@@ -60,11 +60,11 @@ package body Generic_Board is
              Board.Grid (T_Rows'First + 1, T_Cols'Last).Life_Count'Access);
 
       Board.Grid (T_Rows'Last, T_Cols'First).Neighbour_Count :=
-         (North_West => Board.Empty_Cell.Life_Count'Access,
-          West => Board.Empty_Cell.Life_Count'Access,
-          South_West => Board.Empty_Cell.Life_Count'Access,
-          South => Board.Empty_Cell.Life_Count'Access,
-          South_East => Board.Empty_Cell.Life_Count'Access,
+         (North_West => Board.Wall.Life_Count'Access,
+          West => Board.Wall.Life_Count'Access,
+          South_West => Board.Wall.Life_Count'Access,
+          South => Board.Wall.Life_Count'Access,
+          South_East => Board.Wall.Life_Count'Access,
           East =>
              Board.Grid (T_Rows'Last, T_Cols'First + 1).Life_Count'Access,
           North_East =>
@@ -74,11 +74,11 @@ package body Generic_Board is
              Board.Grid (T_Rows'Last - 1, T_Cols'First).Life_Count'Access);
 
       Board.Grid (T_Rows'Last, T_Cols'Last).Neighbour_Count :=
-         (North_East => Board.Empty_Cell.Life_Count'Access,
-          East => Board.Empty_Cell.Life_Count'Access,
-          South_East => Board.Empty_Cell.Life_Count'Access,
-          South => Board.Empty_Cell.Life_Count'Access,
-          South_West => Board.Empty_Cell.Life_Count'Access,
+         (North_East => Board.Wall.Life_Count'Access,
+          East => Board.Wall.Life_Count'Access,
+          South_East => Board.Wall.Life_Count'Access,
+          South => Board.Wall.Life_Count'Access,
+          South_West => Board.Wall.Life_Count'Access,
           West =>
              Board.Grid (T_Rows'Last, T_Cols'Last - 1).Life_Count'Access,
           North_West =>
@@ -90,9 +90,9 @@ package body Generic_Board is
       --  fill the sides
       for Col in T_Cols range T_Cols'First + 1 .. T_Cols'Last - 1 loop
          Board.Grid (T_Rows'First, Col).Neighbour_Count :=
-            (North_West => Board.Empty_Cell.Life_Count'Access,
-             North => Board.Empty_Cell.Life_Count'Access,
-             North_East => Board.Empty_Cell.Life_Count'Access,
+            (North_West => Board.Wall.Life_Count'Access,
+             North => Board.Wall.Life_Count'Access,
+             North_East => Board.Wall.Life_Count'Access,
              West =>
                 Board.Grid (T_Rows'First, Col - 1).Life_Count'Access,
              East =>
@@ -104,9 +104,9 @@ package body Generic_Board is
              South_East =>
                 Board.Grid (T_Rows'First + 1, Col + 1).Life_Count'Access);
          Board.Grid (T_Rows'Last, Col).Neighbour_Count :=
-            (South_West => Board.Empty_Cell.Life_Count'Access,
-             South => Board.Empty_Cell.Life_Count'Access,
-             South_East => Board.Empty_Cell.Life_Count'Access,
+            (South_West => Board.Wall.Life_Count'Access,
+             South => Board.Wall.Life_Count'Access,
+             South_East => Board.Wall.Life_Count'Access,
              West =>
                 Board.Grid (T_Rows'Last, Col - 1).Life_Count'Access,
              East =>
@@ -120,9 +120,9 @@ package body Generic_Board is
       end loop;
       for Row in T_Rows range T_Rows'First + 1 .. T_Rows'Last - 1 loop
          Board.Grid (Row, T_Cols'First).Neighbour_Count :=
-            (North_West => Board.Empty_Cell.Life_Count'Access,
-             West => Board.Empty_Cell.Life_Count'Access,
-             South_West => Board.Empty_Cell.Life_Count'Access,
+            (North_West => Board.Wall.Life_Count'Access,
+             West => Board.Wall.Life_Count'Access,
+             South_West => Board.Wall.Life_Count'Access,
              North =>
                 Board.Grid (Row - 1, T_Cols'First).Life_Count'Access,
              South =>
@@ -134,9 +134,9 @@ package body Generic_Board is
              North_East =>
                 Board.Grid (Row - 1, T_Cols'First + 1).Life_Count'Access);
          Board.Grid (Row, T_Cols'Last).Neighbour_Count :=
-            (North_East => Board.Empty_Cell.Life_Count'Access,
-             East => Board.Empty_Cell.Life_Count'Access,
-             South_East => Board.Empty_Cell.Life_Count'Access,
+            (North_East => Board.Wall.Life_Count'Access,
+             East => Board.Wall.Life_Count'Access,
+             South_East => Board.Wall.Life_Count'Access,
              North =>
                 Board.Grid (Row - 1, T_Cols'Last).Life_Count'Access,
              South =>
@@ -192,7 +192,7 @@ package body Generic_Board is
          new T_Board_Record'(
             Grid => (others =>
                         (others => Get_Empty_Cell)),
-            Empty_Cell => Get_Empty_Cell);
+            Wall => Get_Empty_Cell);
    begin
       Init_Links_Between_Cells (Empty_Board);
       return Empty_Board;

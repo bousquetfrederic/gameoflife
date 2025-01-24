@@ -67,7 +67,7 @@ private
    type T_Board_Record is
       record
          Grid : T_Grid;
-         Empty_Cell : aliased T_Cell;
+         Wall : aliased T_Cell;
       end record;
 
    type T_Board is access T_Board_Record;
