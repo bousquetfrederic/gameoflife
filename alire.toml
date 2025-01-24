@@ -1,0 +1,12 @@
+name = "gameoflife"
+description = "Game of Life in Ada."
+version = "0.1.0-dev"
+
+authors = ["Frederic Bousquet"]
+maintainers = ["Frederic Bousquet <bousquetfrederic@outlook.fr>"]
+maintainers-logins = ["bousquetfrederic"]
+licenses = "GPL-3.0-or-later"
+website = ""
+tags = []
+
+executables = ["gameoflife"]
