@@ -205,14 +205,12 @@ package body Generic_Board is
       --  Will the cells live or die
       for Col in T_Cols range T_Cols'First + 1 .. T_Cols'Last - 1 loop
          for Row in T_Rows range T_Rows'First + 1 .. T_Rows'Last - 1 loop
-            case Board.Grid (Row, Col).Total_Neighbour_Count is
-               when 2 =>
-                  null;
-               when 3 =>
-                  Board.Grid (Row, Col).Life_Count := 1;
-               when others =>
-                  Board.Grid (Row, Col).Life_Count := 0;
-            end case;
+            Board.Grid (Row, Col).Life_Count :=
+              (if Board.Grid (Row, Col).Total_Neighbour_Count = 2
+                then Board.Grid (Row, Col).Life_Count
+               elsif Board.Grid (Row, Col).Total_Neighbour_Count = 3
+                 then 1
+               else 0);
          end loop;
       end loop;
    end Tick;
